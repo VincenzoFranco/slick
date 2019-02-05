@@ -52,7 +52,7 @@
                 centerPadding: '50px',
                 cssEase: 'ease',
                 customPaging: function(slider, i) {
-                    return $('<button type="button" />').text(i + 1);
+                    return '<button type="button">' + (i + 1) + '</button>';
                 },
                 dots: false,
                 dotsClass: 'slick-dots',
@@ -488,13 +488,15 @@
 
             _.$slider.addClass('slick-dotted');
 
-            dot = $('<ul />').addClass(_.options.dotsClass);
-
+            dot = '<ul class="' + _.options.dotsClass + '">';
             for (i = 0; i <= _.getDotCount(); i += 1) {
-                dot.append($('<li />').append(_.options.customPaging.call(this, _, i)));
+                dot += '<li>';
+                dot += _.options.customPaging.call(this, _, i);
+                dot += '</li>';
             }
+            dot += '</ul>';
 
-            _.$dots = dot.appendTo(_.options.appendDots);
+            _.$dots = $(dot).appendTo(_.options.appendDots);
 
             _.$dots.find('li').first().addClass('slick-active');
 
